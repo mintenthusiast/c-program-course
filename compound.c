@@ -7,7 +7,7 @@ double compound(int amount, double rate, int years)
     for (int i = 0; i < years; ++i)
     {
         year_total += amount;
-        year_total *= 1 + rate;
+        year_total *= (1 + rate);
     }
     return year_total;
 }
