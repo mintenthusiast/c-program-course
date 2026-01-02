@@ -26,22 +26,34 @@ int fibonacci(int n)
 
 int main(int argc, char *argv[])
 {   
-    printf("Which Fibonacci number do you want to know?\n");
-    printf("Please input ->: ");    
-
-    int n;
-    scanf("%d", &n);
-    
-    printf("Your input is: %d\n", n);
-    
-    if (n < 0)
+    while (1)
     {
-        printf("Please input a positive integer.\n");
-        return 1;
-    }
+        printf("Which Fibonacci number do you want to know?\n");
+        printf("Please input ->: ");    
 
-    int number = fibonacci(n); 
-    printf("The number is: %d\n", number);    
+        int n;
+        scanf(" %d", &n);
+    
+        printf("Your input is: %d\n", n);
+    
+        if (n < 0)
+        {
+            printf("Please input a positive integer.\n");
+            return 1;
+        }
+
+        int number = fibonacci(n); 
+        printf("The number is: %d\n", number);    
+ 
+        printf("Do you want to continue? y/n\n");
+   
+        char c;
+        scanf(" %c", &c);
+
+        if (c == 'y') { printf("You want to continue.\n"); }
+        else if(c == 'n') { printf("Goodbye.\n"); break; }
+        else { printf("Sorry, I don't understand your input \n"); break;}
+    }
 
     return 0;
 }
