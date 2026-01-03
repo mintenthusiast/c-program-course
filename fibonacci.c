@@ -1,12 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int fibonacci(int n)
+int fibonacci(int n, int *arr)
 {   
     if (n == 0) { return 0; }
-
-    int memory_size = (n + 1) * 4;
-    int *arr = (int *) malloc (memory_size); 
 
     arr[0] = 0;
     arr[1] = 1;
@@ -16,16 +13,16 @@ int fibonacci(int n)
         arr[i] = arr[i - 1] + arr[i - 2];
     }
 
-    int out = arr[n];
-    free(arr);
-    arr = NULL;
-
-    return out;
+    return arr[n];
 }
 
 
 int main(int argc, char *argv[])
 {   
+    int max = 46;
+    int memory_size = max * 4;
+    int *arr = (int *) malloc(memory_size);
+
     while (1)
     {
         printf("Which Fibonacci number do you want to know?\n");
@@ -40,9 +37,15 @@ int main(int argc, char *argv[])
         {
             printf("Please input a positive integer.\n");
             return 1;
+        } 
+        
+        if (n > max) 
+        {
+            printf("Please input an integer that is <= %d. \n", max);
+            return 1;
         }
 
-        int number = fibonacci(n); 
+        int number = fibonacci(n, arr); 
         printf("The number is: %d\n", number);    
  
         printf("Do you want to continue? y/n\n");
