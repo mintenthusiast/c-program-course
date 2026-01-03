@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
         char c;
         scanf(" %c", &c);
 
-        if (c == 'y') { printf("You want to continue.\n"); }
+        if (c == 'y') { printf("You want to continue. \n"); }
         else if(c == 'n') { printf("Goodbye.\n"); break; }
-        else { printf("Sorry, I don't understand your input \n"); break;}
+        else { printf("Sorry, I don't understand your input, goodbye. \n"); break;}
     }
 
     return 0;
