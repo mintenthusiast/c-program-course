@@ -11,6 +11,7 @@ int fibonacci(int n, int *arr)
     for (int i = 2; i <= n; ++i)
     {
         arr[i] = arr[i - 1] + arr[i - 2];
+        printf("Computed: f(%d) =  %d\n", i, arr[i]);
     }
 
     return arr[n];
@@ -22,6 +23,8 @@ int main(int argc, char *argv[])
     int max = 46;
     int memory_size = max * 4;
     int *arr = (int *) malloc(memory_size);
+
+    int max_computed = 0;
 
     while (1)
     {
@@ -44,8 +47,19 @@ int main(int argc, char *argv[])
             printf("Please input an integer that is <= %d. \n", max);
             return 1;
         }
-
-        int number = fibonacci(n, arr); 
+       
+        int number  = 0;
+ 
+        if (n > max_computed)
+        {
+            max_computed = n;
+            number = fibonacci(n, arr);
+        }
+        else
+        {
+            number = arr[n];
+        }
+ 
         printf("The number is: %d\n", number);    
  
         printf("Do you want to continue? y/n\n");
