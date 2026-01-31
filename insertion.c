@@ -2,6 +2,35 @@
 #include<stdlib.h>
 #include<string.h>
 
+int insert2array(int *arr, int len, int n)
+{
+   /* insert n into arr[] */
+   // 1) find location
+   int j = 0;
+   for (int i = 0; i < len; ++i)
+   {
+       if(arr[i] > n)
+       {
+          j = i;
+          break;
+       }
+   }
+
+   printf("j = %d, n = %d\n", j, n);
+   // 2) shift arr[i], arr[i+1], ... so forth
+   for (int i = len-2; i >= j; --i)
+   {
+      arr[i+1] = arr[i];
+   }
+
+   // 3) arr[i] = n
+
+   arr[j] = n;
+
+   return 0;
+}
+
+
 int main(int argc, char *argv[])
 {
    /* input 1: comma-seperated numbers, sorted
@@ -17,7 +46,9 @@ int main(int argc, char *argv[])
    }
 
    int commas = 0;
-   for (int i = 0; i < strlen(argv[1]); ++i)
+   int n = strlen(argv[1]);
+
+   for (int i = 0; i < n; ++i)
    {
        if (argv[1][i] == ',')
        {
@@ -25,11 +56,11 @@ int main(int argc, char *argv[])
        }
     }
 
-    int *arr = (int *) malloc ((commas + 1) * 4);   
+    int *arr = (int *) malloc ((commas + 2) * 4);   
     arr[0] = atoi(&argv[1][0]);
     int j  = 1; 
 
-    for (int i = 0; i < strlen(argv[1]); ++i)
+    for (int i = 0; i < n; ++i)
     {
        if (argv[1][i] == ',')
        {
@@ -38,15 +69,19 @@ int main(int argc, char *argv[])
        }
     }
 
-    for (int i = 0; i < commas + 1; ++i)
+    for (int i = 0; i < commas + 2; ++i)
     {
-        printf("%d\n", arr[i]);
+        printf("%d ", arr[i]);
     }
 
+    insert2array(arr, commas + 2, atoi(argv[2]));
+
+    for (int i = 0; i < commas + 2; ++i)
+    {
+        printf("%d ", arr[i]);
+    }
+    
     free(arr); arr = NULL;
-
-
-
 
    return 0;
 }
