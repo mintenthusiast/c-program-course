@@ -6,7 +6,7 @@ int insert2array(int *arr, int len, int n)
 {
    /* insert n into arr[] */
    // 1) find location
-   int j = 0;
+   int j = len - 1;
    for (int i = 0; i < len; ++i)
    {
        if(arr[i] > n)
@@ -30,6 +30,17 @@ int insert2array(int *arr, int len, int n)
    return 0;
 }
 
+int print_array(int *arr, int len)
+{ 
+  for (int i = 0; i < len; ++i)
+       {
+           printf("%d ", arr[i]);
+       }
+
+  printf("\n");
+  return 0;
+
+}  
 
 int main(int argc, char *argv[])
 {
@@ -69,17 +80,11 @@ int main(int argc, char *argv[])
        }
     }
 
-    for (int i = 0; i < commas + 2; ++i)
-    {
-        printf("%d ", arr[i]);
-    }
-
+    printf("Before: ");
+    print_array(arr, commas + 2);
     insert2array(arr, commas + 2, atoi(argv[2]));
-
-    for (int i = 0; i < commas + 2; ++i)
-    {
-        printf("%d ", arr[i]);
-    }
+    printf("After: ");
+    print_array(arr, commas + 2);
     
     free(arr); arr = NULL;
 
