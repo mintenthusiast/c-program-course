@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 
+int print_array(int *a, int len);
+
 int min_loc(int *a, int len)
 {
    int j = 0;
@@ -17,13 +19,27 @@ int min_loc(int *a, int len)
    }
 
    printf("The min value is: %d, the index of the min is: %d\n", min, j);
-   
+
+   a[j] = a[0];
+   a[0] = min;
+  
+   return 0;
+}
+
+int print_array(int *a, int len)
+{
+   for (int i = 0; i < len; ++i)
+   {
+      printf("%d ", a[i]);
+   }
+   printf("\n");
+
    return 0;
 }
 
 int main(int argc, char *argv[])
 {
-   if (argc != 3) 
+   if (argc != 2) 
    {
       printf("Please input a comma-seperated array and a number!\n");
       return 1;
@@ -40,7 +56,7 @@ int main(int argc, char *argv[])
    }
 
    int length = commas + 1;
-   int *arr = (int *) malloc((length + 1) * sizeof(int));
+   int *arr = (int *) malloc((length) * sizeof(int));
    
    arr[0] = atoi(&argv[1][0]);
    int j = 1;
@@ -54,7 +70,12 @@ int main(int argc, char *argv[])
       }
    } 
 
-   min_loc(arr, length);
+   for (int i = 0; i < length - 1; ++i)
+   {
+      min_loc(arr + i, length - i);
+   }
+
+   print_array(arr, length);
 
    free(arr);
    arr = NULL;
