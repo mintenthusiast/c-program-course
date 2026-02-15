@@ -18,14 +18,24 @@ int print_file (char *filename)
    // not hard-cded 255
    
    char *p = fgets(buf, sizeof(buf), fp);
+   char *token = strtok(buf, ",");
 
    while (p != NULL)
    {
-      printf("%s", buf);
+      while (token != NULL)
+      {
+         int val = atoi(token);
+         printf("%d ", val);
+ 
+         token = strtok(NULL, ",");
+      }
+
       p = fgets(buf, sizeof(buf), fp);
+      token = strtok(buf, ",");
+      printf("\n");
    }
 
-   printf("finished reading the file");
+   printf("finished reading the file\n");
 
    fclose(fp);
    return 0;
