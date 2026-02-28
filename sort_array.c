@@ -1,41 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
-int print_array(int *a, int len);
-
-int min_loc(int *a, int len)
-{
-   int j = 0;
-   int min = a[0];
-
-   for (int i = 0; i < len; ++i)
-   {
-      if(min > a[i])
-      {
-         min = a[i];
-         j = i;
-      }
-   }
-
-   printf("The min value is: %d, the index of the min is: %d\n", min, j);
-
-   a[j] = a[0];
-   a[0] = min;
-  
-   return 0;
-}
-
-int print_array(int *a, int len)
-{
-   for (int i = 0; i < len; ++i)
-   {
-      printf("%d ", a[i]);
-   }
-   printf("\n");
-
-   return 0;
-}
+#include "myarray.h"
 
 int main(int argc, char *argv[])
 {
@@ -70,11 +36,7 @@ int main(int argc, char *argv[])
       }
    } 
 
-   for (int i = 0; i < length - 1; ++i)
-   {
-      min_loc(arr + i, length - i);
-   }
-
+   sort_array(arr, length);
    print_array(arr, length);
 
    free(arr);
