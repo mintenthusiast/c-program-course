@@ -3,10 +3,9 @@
 #include<string.h>
 #include "myarray.h"
 
-void process_file (char *filename)
+int process_file (char *filename)
 {
    FILE *fp = fopen(filename, "r");
-   int dot_product = 0;
 
    if (fp == NULL)
    {
@@ -55,7 +54,9 @@ void process_file (char *filename)
    printf("\nVector B: %d elements \n", lb);
    print_array(vb, lb);
 
+   dot_product(va, la, vb, lb);
    fclose(fp);
+   return 0;
 }
 
 int dot_product(int* va, int la, int* vb, int lb)
@@ -80,10 +81,10 @@ int main(int argc, char* argv[])
 {
    if (argc < 2)
    {
-      print("please input a file name.");
+      printf("please input a file name.");
       return 1;
    }
    
-   process_file(argv[1]);
+   printf("dot product is: %d.", process_file(argv[1]));
    return 0;
 }
