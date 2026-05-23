@@ -7,12 +7,7 @@
 int dot_product(int* va, int la, int* vb, int lb)
 {
    int total = 0;
-   int shortest_length = la;
-
-   if (la > lb)
-   {
-      shortest_length = lb;
-   }
+   int shortest_length = la < lb ? la : lb;
       
    for (int i = 0; i < shortest_length; ++i)
    {
@@ -21,6 +16,23 @@ int dot_product(int* va, int la, int* vb, int lb)
    
    return total;
 }
+
+int parse_vector(int *vector, char *buf)
+{
+   /* parse a row of data and write values into a vector array */
+
+   int len = 0;
+
+   char *token = strtok(buf, ",\n");
+   while (token != NULL)
+   {
+      vector[len] = atoi(token);
+      len += 1;
+      token = strtok(NULL, ",\n");
+   }
+   return len;
+}	
+
 
 int process_file (char *filename)
 {
@@ -38,44 +50,37 @@ int process_file (char *filename)
    // not hard-coded 255
    
    char *p = fgets(buf, sizeof(buf), fp);
-   char *token = strtok(buf, ",\n");
+   while (p != NULL)
+   {	   
+      int va[100];    
+      int la = parse_vector(va, buf);
 
-   int va[100];    
-   int la = 0;
-    
-   while (token != NULL)
-   {
-      va[la] = atoi(token);
-      la += 1;
- 
-      token = strtok(NULL, ",\n");
+      printf("\nVector A: %d elements\n", la);
+      print_array(va, la);
+
+      p = fgets(buf, sizeof(buf), fp);
+
+      if (p == NULL)
+      { 
+         printf("Odd numbered lines found. Dot product is not evaluated.");
+         break;
+      }
+
+      int vb[100];
+      int lb = parse_vector(vb, buf);
+     
+      printf("\nVector B: %d elements \n", lb);
+      print_array(vb, lb);
+
+      printf("\nThe dot product is: %d.\n", dot_product(va, la, vb, lb));
+
+      p = fgets(buf, sizeof(buf), fp);
    }
-    
-   int vb[100];
-   int lb = 0;
 
-   p = fgets(buf, sizeof(buf), fp);
-   token = strtok(buf, ",");
-
-   while (token != NULL)
-   {
-      vb[lb] = atoi(token);
-      lb += 1;
-      
-      token = strtok(NULL, ",\n");
-   }
-
-   printf("finished reading the file\n");
+   printf("\nfinished reading the file\n");
    
-   printf("Vector A: %d elements\n", la);
-   print_array(va, la);
-
-   printf("\nVector B: %d elements \n", lb);
-   print_array(vb, lb);
-
    fclose(fp);
 
-   printf("\nThe dot product is: %d.", dot_product(va, la, vb, lb));
    return 0;
 }
 
