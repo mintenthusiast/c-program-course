@@ -3,6 +3,25 @@
 #include<string.h>
 #include "myarray.h"
 
+
+int dot_product(int* va, int la, int* vb, int lb)
+{
+   int total = 0;
+   int shortest_length = la;
+
+   if (la > lb)
+   {
+      shortest_length = lb;
+   }
+      
+   for (int i = 0; i < shortest_length; ++i)
+   {
+      total += va[i] * vb[i];
+   }
+   
+   return total;
+}
+
 int process_file (char *filename)
 {
    FILE *fp = fopen(filename, "r");
@@ -54,27 +73,8 @@ int process_file (char *filename)
    printf("\nVector B: %d elements \n", lb);
    print_array(vb, lb);
 
-   dot_product(va, la, vb, lb);
    fclose(fp);
-   return 0;
-}
-
-int dot_product(int* va, int la, int* vb, int lb)
-{
-   int dot_product = 0;
-
-   if (la != lb)
-   {
-      printf("Vector element numbers are not equal.");
-      return 67;
-   }
-
-   for (int i = 0; i < la; ++i)
-   {
-      dot_product += va[i] * vb[i];
-   }
-   
-   return dot_product;
+   return dot_product(va, la, vb, lb);
 }
 
 int main(int argc, char* argv[])
@@ -85,6 +85,6 @@ int main(int argc, char* argv[])
       return 1;
    }
    
-   printf("dot product is: %d.", process_file(argv[1]));
+   printf("\nThe dot product is: %d.", process_file(argv[1]));
    return 0;
 }
