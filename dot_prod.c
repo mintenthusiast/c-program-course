@@ -74,7 +74,9 @@ int process_file (char *filename)
    print_array(vb, lb);
 
    fclose(fp);
-   return dot_product(va, la, vb, lb);
+
+   printf("\nThe dot product is: %d.", dot_product(va, la, vb, lb));
+   return 0;
 }
 
 int main(int argc, char* argv[])
@@ -85,6 +87,6 @@ int main(int argc, char* argv[])
       return 1;
    }
    
-   printf("\nThe dot product is: %d.", process_file(argv[1]));
+   process_file(argv[1]);
    return 0;
 }
