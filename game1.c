@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <conio.h>
 
 void print_stars(int x, int y, int row_max, int col_max)
 {
@@ -39,31 +41,31 @@ int main(int argc, char* argv[])
 
 	while (1)
 	{
-		scanf(" %c", &input);
-
-		if (input == 'w')
+		if (_kbhit())
 		{
-			if (y > 0) y--;	
-		}
+			input = _getch();
 
-		else if (input == 's')
-		{
-			if (y < row_max - 3) y++;
-		}
+			if (input == 'w')
+			{
+				if (y > 0) y--;	
+			}
 
-		else if (input == 'a')
-		{	
-			if (x > 0) x--;
-		}
+			else if (input == 'a')
+			{	
+				if (x > 0) x--;
+			}
 	
-		else if (input == 'd')
-		{
-			if (x < col_max - 2) x++;	
+			else if (input == 'd')
+			{
+				if (x < col_max - 2) x++;	
+			}	
 		}
 
-		else { exit(0); }
+		
+		if (y < col_max - 3) y++; // move down
 
 		print_stars(x, y, row_max, col_max);
+		sleep(1);
 
 	}
 	
