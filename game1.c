@@ -3,12 +3,16 @@
 
 void print_stars(int x, int y, int row_max, int col_max)
 {
-	for (int row = 0; row < row_max; row++)
+	int arrx[4] = {x, x, x, x + 1};
+	int arry[4] = {y, y + 1, y + 2, y + 2};
 
+	int counter = 0;
+
+	for (int row = 0; row < row_max; row++)
 	{
 		for (int col = 0; col < col_max; col++)
 		{
-			if (row == x && col == y) { printf(" "); }
+			if (row == arry[counter] && col == arrx[counter]) { printf(" "); counter++; }
 			else { printf("*"); }
 		}
 
@@ -39,22 +43,22 @@ int main(int argc, char* argv[])
 
 		if (input == 'w')
 		{
-			if (x > 0) x--;	
+			if (y > 0) y--;	
 		}
 
 		else if (input == 's')
 		{
-			if (x < row_max - 1) x++;
+			if (y < row_max - 3) y++;
 		}
 
 		else if (input == 'a')
 		{	
-			if (y > 0) y--;
+			if (x > 0) x--;
 		}
 	
 		else if (input == 'd')
 		{
-			if (y < col_max - 1) y++;	
+			if (x < col_max - 2) x++;	
 		}
 
 		else { exit(0); }
